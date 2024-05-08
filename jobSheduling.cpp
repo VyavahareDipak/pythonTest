@@ -29,7 +29,6 @@ void jobSheduler(map<int,int>profit,map<int,int>deadline,int n){
                 shedule[i]=p.second ; //store profit ;
                 job[i] = p.first ;    // store job ;
                 break ;
-
             }
         }
     }

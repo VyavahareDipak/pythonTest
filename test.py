@@ -1,36 +1,61 @@
-import random
+class evaluation:
+    def __init__(self):
+        self.name = input("enter name of employee : ")
+        self.compantancies = {
+            "communication":[0,0,0],
+            "productivity":[0,0,0],
+            "Integrity":[0,0,0],
+            "Punctuality":[0,0,0],
+            "Creativity":[0,0,0],
+        }
 
-response={
-    "greeting":["hi, welcome to our shop","hello","hello ,how can I help you"],
-    "farewell":["bye ,have a good day!","Thanks for visiting. see you soon!"],
-    "thank":["You're welcome!","My plesure","No Problem!"],
-    "product":["we have all grocery products","Dairy products are also available"],
-    "time":["shop open at 9:00 AM and close at 9:00 PM every day except sunday","We are open from 9:00 AM to 9:00 PM,monday to saturday "],
-    "location":["Our location is 123 street"],
-    "default":["Could you rephrase that ?","Sorry I didn't understand that"] 
-}
+        self.performance = {
+            "Goal1":[0,0,0],
+            "Goal2":[0,0,0],
+            "Goal3":[0,0,0],
+            "Goal4":[0,0,0],
+            "Goal5":[0,0,0],
+        }
 
-def chatout(user_input):
-    if "hey" in user_input or "hello" in user_input or "hi" in user_input:
-        return random.choice(response["greeting"])
-    elif "Bye" in user_input:
-        return random.choice(response["farewell"])
-    elif "product" in user_input:
-        return random.choice(response["product"])
-    elif "hour" in user_input or "time" in user_input or "close" in user_input or "open" in user_input:
-        return random.choice(response["time"])
-    else:
-        return random.choice(response["default"])
+    def takeInput(self):
+        print("enter rating 1-3")
+        totalweightage = 0 
+        for key in self.compantancies.keys():
+            self.compantancies[key][0] = int(input(f"enter ratting for {key}:"))
+            self.compantancies[key][1] = int(input(f"enter weightage {100-totalweightage} remaining:"))
+            totalweightage+= self.compantancies[key][1]
+            self.compantancies[key][2] = self.compantancies[key][1]*self.compantancies[key][0]/100   
 
-def main():
-    print("wellcome to our general store")
-    
-    while True:
-        user_input = input() ;
-        if user_input=="exit":
-            print("chatbot:Goodbye")
-            break 
+        for key in self.performance.keys():
+            self.performance[key][0] = int(input(f"enter ratting for {key}:"))
+            self.performance[key][1] = int(input(f"enter weightage for {key} {100-totalweightage} remaining :"))
+            self.performance[key][2] = self.performance[key][0]*self.performance[key][1]/100
+
+
+
+    def calculate(self):
+        total = 0 ;
+        self.takeInput() 
+        print("compantancies\t\tratting\tweightage\tscore")
+
+        for key in self.compantancies.keys():
+            print(f"{key}\t\t{self.compantancies[key][1]}\t\t{self.compantancies[key][2]}")
+            total +=self.compantancies[key][2]
+        print("\n")
+
+        print("Goals\t\tratting\tweightage\tscore")
+        for key in self.performance.keys():
+            print(f"{key}\t\t{self.performance[key][0]}\t\t{self.performance[key][1]}\t\t{self.performance[key][2]}")
+            total +=self.performance[key][2] 
+
+        print("total ratting = ",total)
+        if total>2.7 :
+            print("employee pass the requirements")
+        elif total>1.7 and total<=2.7 :
+            print("employee meet requirements")
         else:
-            print("chatbot:",chatout(user_input))
+            print("employee does not meet requirements")
 
-main()
+
+obj = evaluation();
+obj.calculate() ;

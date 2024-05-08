@@ -1,4 +1,1 @@
-if(h==0){
-                //     printAns() ;
-                //     return 1 ;
-                // }
+vector<pair<int,int>>,decltype(compare)
